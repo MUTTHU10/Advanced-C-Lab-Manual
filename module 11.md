@@ -12,10 +12,32 @@ Algorithm:
 5.	Call the max_of_four function with the input integers and store the result in the greater variable
  
 Program:
-//type your code here
+~~~
+#include <stdio.h>
+int max_of_four(int a, int b, int c, int d)
+{
+    int max = a;
+
+    if (b > max)
+        max = b;
+    if (c > max)
+        max = c;
+    if (d > max)
+        max = d;
+
+    return max;
+}
+int main(){
+    int a,b,c,d;
+    scanf("%d %d %d %d",&a,&b,&c,&d);
+    printf("%d",max_of_four(a,b,c,d));
+}
+~~~
 
 Output:
-//paste your output here
+
+<img width="685" height="447" alt="image" src="https://github.com/user-attachments/assets/4bcef61e-da1b-438d-b966-7321a7ef8a11" />
+
 
 Result:
 Thus, the program  that create a function to find the greatest number is verified successfully.
@@ -36,10 +58,54 @@ Algorithm:
 7.	Call the calculate_the_max function with input values.
  
 Program:
-//type your code here
+
+~~~
+#include <stdio.h>
+
+void calculate_the_maximum(int n, int k)
+{
+    int max_and = 0, max_or = 0, max_xor = 0;
+
+    for (int i = 1; i <= n; i++)
+    {
+        for (int j = i + 1; j <= n; j++)
+        {
+            int a = i & j;
+            int b = i | j;
+            int c = i ^ j;
+
+            if (a < k && a > max_and)
+                max_and = a;
+
+            if (b < k && b > max_or)
+                max_or = b;
+
+            if (c < k && c > max_xor)
+                max_xor = c;
+        }
+    }
+
+    printf("%d\n", max_and);
+    printf("%d\n", max_or);
+    printf("%d\n", max_xor);
+}
+
+int main()
+{
+    int n, k;
+
+    scanf("%d %d", &n, &k);
+
+    calculate_the_maximum(n, k);
+
+    return 0;
+}
+~~~
 
 Output:
-//paste your output here
+
+<img width="627" height="427" alt="image" src="https://github.com/user-attachments/assets/8f29d6b5-8fc8-44c3-870c-20920febf5b0" />
+
 
 Result:
 Thus, the program to print the maximum values for the AND, OR and XOR comparisons
@@ -59,10 +125,80 @@ Algorithm:
 5.	Use a for loop to iterate over the queries.
  
 Program:
-//type your code here
+
+~~~
+#include <stdio.h>
+#include <stdlib.h>
+
+int main()
+{
+    int total_number_of_shelves;
+    scanf("%d", &total_number_of_shelves);
+
+    int total_number_of_queries;
+    scanf("%d", &total_number_of_queries);
+
+    // Array to store number of books in each shelf
+    int *total_number_of_books = (int *)calloc(total_number_of_shelves, sizeof(int));
+
+    // Array of pointers for shelves
+    int **total_number_of_pages = (int **)malloc(total_number_of_shelves * sizeof(int *));
+
+    for (int i = 0; i < total_number_of_shelves; i++)
+    {
+        total_number_of_pages[i] = NULL;
+    }
+
+    while (total_number_of_queries--)
+    {
+        int type;
+        scanf("%d", &type);
+
+        if (type == 1)
+        {
+            int x, y;
+            scanf("%d %d", &x, &y);
+
+            total_number_of_books[x]++;
+
+            total_number_of_pages[x] = (int *)realloc(
+                total_number_of_pages[x],
+                total_number_of_books[x] * sizeof(int));
+
+            total_number_of_pages[x][total_number_of_books[x] - 1] = y;
+        }
+        else if (type == 2)
+        {
+            int x, y;
+            scanf("%d %d", &x, &y);
+
+            printf("%d\n", total_number_of_pages[x][y]);
+        }
+        else if (type == 3)
+        {
+            int x;
+            scanf("%d", &x);
+
+            printf("%d\n", total_number_of_books[x]);
+        }
+    }
+
+    for (int i = 0; i < total_number_of_shelves; i++)
+    {
+        free(total_number_of_pages[i]);
+    }
+
+    free(total_number_of_pages);
+    free(total_number_of_books);
+
+    return 0;
+}
+~~~
 
 Output:
-//paste your output here
+
+<img width="1066" height="407" alt="image" src="https://github.com/user-attachments/assets/f91dd08b-a5d5-45b4-8e03-1408146247cd" />
+
 
 
 Result:
@@ -86,10 +222,38 @@ Algorithm:
 
 
 Program:
-//type your code here
+
+~~~
+#include <stdio.h>
+#include <stdlib.h>
+
+int main()
+{
+    int n;
+    scanf("%d", &n);
+
+    int *arr = (int *)malloc(n * sizeof(int));
+
+    int sum = 0;
+
+    for (int i = 0; i < n; i++)
+    {
+        scanf("%d", &arr[i]);
+        sum += arr[i];
+    }
+
+    printf("%d", sum);
+
+    free(arr);
+
+    return 0;
+}
+~~~
 
 Output:
-//paste your output here
+
+<img width="1192" height="402" alt="image" src="https://github.com/user-attachments/assets/35cd527f-b3e8-450f-a00f-a034c1a3ae60" />
+
 
  
 
@@ -120,10 +284,46 @@ o	If a character is not a space, it may belong to a word. If it's the first non-
 
 
 Program:
-//type your code here
+~~~
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+int main()
+{
+    char *s;
+
+    s = (char *)malloc(1024 * sizeof(char));
+
+    scanf("%[^\n]", s);
+
+    s = (char *)realloc(s, strlen(s) + 1);
+
+    int len = strlen(s);
+
+    for (int i = 0; i < len; i++)
+    {
+        if (s[i] == ' ')
+        {
+            printf("\n");
+        }
+        else
+        {
+            printf("%c", s[i]);
+        }
+    }
+
+    free(s);
+
+    return 0;
+}
+~~~
 
 Output:
-//paste your output here
+
+<img width="640" height="357" alt="image" src="https://github.com/user-attachments/assets/4714939b-071a-4fad-94aa-0338eb19d71f" />
+
+
 
 
 
