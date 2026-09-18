@@ -16,12 +16,43 @@ Else
  
 Program:
 
-//type your code here
+~~~
+#include <stdio.h>
+
+struct person
+{
+    char name[50];
+    int age;
+};
+
+int main()
+{
+    struct person p[1];
+    scanf("%d", &p[0].age);
+
+    scanf("%s", p[0].name);
+
+    if (p[0].age > 18)
+    {
+        printf("Age:%d\n", p[0].age);
+        printf("Name:%svaccine:%d\n", p[0].name,p[0].age);
+        printf("eligibility:yes");
+    }
+    else{
+        printf("Age:%d\n", p[0].age);
+        printf("Name:%svaccine:%d\n", p[0].name,p[0].age);
+        printf("eligibility:no");
+        
+    }
+    
+    return 0;
+}
+~~~
 
 
 Output:
 
-//paste your output here
+<img width="836" height="401" alt="image" src="https://github.com/user-attachments/assets/47ec8917-ec46-42b7-9629-4023868a771e" />
 
 
 Result:
@@ -44,7 +75,69 @@ Algorithm:
  
 Program:
 
-//type your code here
+~~~
+#include <stdio.h>
+
+struct complex
+{
+    int real;
+    int imag;
+};
+
+void read(struct complex *c)
+{
+    scanf("%d", &c->real);
+    scanf("%d", &c->imag);
+}
+
+struct complex add(struct complex a, struct complex b)
+{
+    struct complex z;
+    z.real = a.real + b.real;
+    z.imag = a.imag + b.imag;
+    return z;
+}
+
+struct complex sub(struct complex a, struct complex b)
+{
+    struct complex z;
+    z.real = a.real - b.real;
+    z.imag = a.imag - b.imag;
+    return z;
+}
+
+struct complex mul(struct complex a, struct complex b)
+{
+    struct complex z;
+    z.real = a.real * b.real - a.imag * b.imag;
+    z.imag = a.real * b.imag + a.imag * b.real;
+    return z;
+}
+
+void display(struct complex z)
+{
+    printf("The no. is= %d+%di\n", z.real, z.imag);
+}
+
+int main()
+{
+    struct complex a, b, c;
+
+    read(&a);
+    read(&b);
+
+    c = add(a, b);
+    display(c);
+
+    c = sub(a, b);
+    display(c);
+
+    c = mul(a, b);
+    display(c);
+
+    return 0;
+}
+~~~
 
 
 
@@ -52,7 +145,8 @@ Program:
 Output:
 
 
-//paste your output here
+
+<img width="1065" height="435" alt="image" src="https://github.com/user-attachments/assets/834da29b-f972-434c-bfd7-0e335367bbda" />
 
 
 
@@ -86,15 +180,35 @@ Use scanf to input the file name into the name array.
  
 Program:
 
-//type your code here
-
+~~~
+#include <stdio.h>
+int main(){
+    FILE *fp;
+    char file[100],name[100];
+    int n;
+    scanf("%s",file);
+    fp=fopen(file,"w");
+    if (fp==NULL){
+        printf("File cannot be created\n");
+        return 1;
+    }
+    printf("%s Opened\n",file);
+    scanf("%d",&n);
+    int i;
+    for (i=1;i<=n;i++){
+        scanf("%s",name);
+        fprintf(fp,"%s",name);
+    }
+    printf("Data added Successfully");
+}
+~~~
 
 
 
 Output:
 
 
-//paste your output here
+<img width="966" height="445" alt="image" src="https://github.com/user-attachments/assets/2a551a75-cd10-4fb5-a09d-fa48b11ca1f6" />
 
 
 
@@ -133,15 +247,36 @@ Use scanf to input the file name into the name array and the number of strings i
  
 Program:
 
-//type your code here
-
+~~~
+#include <stdio.h>
+int main(){
+    FILE *fp;
+    char file[100],name[100];
+    int n;
+    scanf("%s",file);
+    fp=fopen(file,"w");
+    if (fp==NULL){
+        printf("File cannot be created\n");
+        return 1;
+    }
+    printf("%s Opened\n",file);
+    scanf("%d",&n);
+    int i;
+    for (i=1;i<=n;i++){
+        scanf("%s",name);
+        fprintf(fp,"%s",name);
+    }
+    printf("Data added Successfully");
+}
+~~~
 
 
 
 Output:
 
 
-//paste your output here
+
+<img width="966" height="445" alt="image" src="https://github.com/user-attachments/assets/58a711dc-c46d-4e34-9940-a6a3d446782f" />
 
 
 
@@ -187,15 +322,61 @@ Algorithm:
 
 Program:
 
-//type your code here
+~~~
+#include <stdio.h>
+#include <string.h>
 
+struct student {
+    char name[20];
+    int roll;
+    char gender;
+    int marks[5];
+    int total;
+    float avg;
+};
+
+void calculate(struct student *s) {
+    s->total = 0;
+    for(int i = 0; i < 5; i++) {
+        s->total += s->marks[i];
+    }
+    s->avg = s->total / 5.0;
+}
+
+void printStudent(struct student s) {
+    printf("Name:%s\n", s.name);
+    printf("Roll:%d\n", s.roll);
+    printf("Gender:%c\n", s.gender);
+    printf("Total:%d\n", s.total);
+    printf("Average:%.2f\n", s.avg);
+}
+
+int main() {
+    struct student s1, s2;
+    strcpy(s1.name, "Kannan");
+    s1.roll = 33;
+    s1.gender = 'M';
+    s1.marks[0] = 87; s1.marks[1] = 84; s1.marks[2] = 82; 
+    s1.marks[3] = 96; s1.marks[4] = 78;
+    calculate(&s1);
+    strcpy(s2.name, "Saveetha");
+    s2.roll = 43;
+    s2.gender = 'M';
+    s2.marks[0] = 76; s2.marks[1] = 98; s2.marks[2] = 68; 
+    s2.marks[3] = 87; s2.marks[4] = 93;
+    calculate(&s2);
+    
+    printStudent(s1);
+    printStudent(s2);
+    
+    return 0;
+}
+~~~
 
 
 
 Output:
-
-
-//paste your output here
+<img width="796" height="487" alt="image" src="https://github.com/user-attachments/assets/7b6494c6-f9cf-4353-8942-53a3c28e8ee9" />
 
 
 
